@@ -40,21 +40,18 @@ export class UserService implements OnModuleInit {
       });
       const savedUser = await this.userRepository.save(user);
 
-      // Referral code orqali taklif qilgan userni topish
       let referralBonus = 0;
       if (dto.referralCode) {
         const referrer = await this.userRepository.findOne({
           where: { id: dto.referralCode },
         });
         if (referrer) {
-          referralBonus = 50; // bonus bal miqdori
-          // Taklif qilgan userga bonus
+          referralBonus = 50;
           await this.loyaltyService.update(referrer.id, {
             points: referralBonus,
           });
         }
       }
-      // Yangi userga bonus
       await this.loyaltyService.create({
         userId: savedUser.id,
         points: referralBonus,
@@ -71,9 +68,7 @@ export class UserService implements OnModuleInit {
     }
   }
 
-  // Super adminni avtomatik yaratish
   async onModuleInit() {
-    // SUPER-ADMIN creation logic will be moved to admin module
   }
 
   async create(createUserDto: CreateUserDto): Promise<object> {
@@ -107,7 +102,6 @@ export class UserService implements OnModuleInit {
     }
   }
 
-  // Oddiy user uchun faqat o'zini ko'rsatish
   async findSelf(userId: string): Promise<object> {
     try {
       const user = await this.userRepository.findOne({ where: { id: userId } });
@@ -139,8 +133,6 @@ export class UserService implements OnModuleInit {
       validateUUID(id, 'User ID');
       const user = await this.userRepository.findOne({ where: { id } });
       if (!user) throw new NotFoundException('User not found');
-
-      // Email unique validation
 
       await this.userRepository.update(id, updateUserDto);
       const updatedUser = await this.userRepository.findOne({ where: { id } });

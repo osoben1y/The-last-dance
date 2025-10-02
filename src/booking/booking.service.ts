@@ -21,7 +21,6 @@ export class BookingService {
 
   async create(dto: CreateBookingDto): Promise<object> {
     try {
-      // O‘rindiq va vaqt bandligini tekshirish
       const seatRepo = this.bookingRepository.manager.getRepository('Seat');
       const seat = await seatRepo.findOne({
         where: { id: (dto as any).seatId },
@@ -29,7 +28,6 @@ export class BookingService {
       });
       if (!seat) throw new BadRequestException('Seat not found');
       if (!seat.class) throw new BadRequestException('Seat class not found');
-      // O‘sha o‘rindiq va flight uchun bandlikni tekshirish
       const existingBooking = await this.bookingRepository.findOne({
         where: { flightId: dto.flightId, seatId: (dto as any).seatId },
       });
@@ -39,7 +37,6 @@ export class BookingService {
         );
       const price = seat.class.price;
 
-      // Booking yaratish
       const booking = this.bookingRepository.create({
         ...dto,
         price,

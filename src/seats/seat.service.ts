@@ -21,7 +21,6 @@ export class SeatService {
 
   async create(dto: CreateSeatDto): Promise<object> {
     try {
-      // Bir samolyotda bir xil seatNumber borligini tekshirish
       const existing = await this.seatRepository.findOne({
         where: {
           planeId: dto.planeId,

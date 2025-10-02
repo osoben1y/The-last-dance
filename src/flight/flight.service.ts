@@ -17,7 +17,6 @@ export class FlightService {
 
   async create(dto: CreateFlightDto): Promise<object> {
     try {
-      // Bir vaqtda bir yo'nalishda flight borligini tekshirish
       const existing = await this.flightRepository.findOne({
         where: {
           fromAirportId: dto.fromAirportId,

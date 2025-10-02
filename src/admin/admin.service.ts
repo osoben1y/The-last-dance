@@ -61,7 +61,6 @@ export class AdminService implements OnModuleInit {
 
   async create(createAdminDto: CreateAdminDto): Promise<object> {
     try {
-      // Email unique validation
       const existing = await this.adminRepository.findOne({
         where: { email: createAdminDto.email },
       });
@@ -146,9 +145,8 @@ export class AdminService implements OnModuleInit {
   }
 
   async findByUserId(userId: string): Promise<Admin | null> {
-    // userId orqali adminni topish
     if (!userId) return null;
-  return null; // or handle as needed
+  return null;
   }
 }
 

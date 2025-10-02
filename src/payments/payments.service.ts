@@ -20,7 +20,6 @@ export class PaymentsService {
 
   async create(dto: CreatePaymentDto): Promise<object> {
     try {
-      // bookingId mavjudligini tekshirish
       const booking = await this.bookingRepository.findOne({ where: { id: dto.bookingId } });
       if (!booking) {
         throw new NotFoundException('Booking not found for this bookingId');
@@ -64,7 +63,6 @@ export class PaymentsService {
     try {
       const payment = await this.paymentRepository.findOne({ where: { id } });
       if (!payment) throw new NotFoundException('Payment not found');
-      // Agar bookingId o'zgartirilsa, mavjudligini tekshirish
       if (dto.bookingId) {
         const booking = await this.bookingRepository.findOne({ where: { id: dto.bookingId } });
         if (!booking) throw new NotFoundException('Booking not found for this bookingId');

@@ -17,7 +17,6 @@ export class LoyaltyService {
 
   async create(dto: CreateLoyaltyDto): Promise<object> {
     try {
-      // UserId unique validation (har bir user uchun bitta loyalty)
       const existing = await this.loyaltyRepository.findOne({
         where: { userId: dto.userId },
       });
@@ -61,7 +60,6 @@ export class LoyaltyService {
       validateUUID(id, 'Loyalty ID');
       const loyalty = await this.loyaltyRepository.findOne({ where: { id } });
       if (!loyalty) throw new Error('Loyalty not found');
-      // UserId unique validation (update uchun)
       if (dto.userId && dto.userId !== loyalty.userId) {
         const existing = await this.loyaltyRepository.findOne({
           where: { userId: dto.userId },

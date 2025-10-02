@@ -14,7 +14,6 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AdminOnlyGuard } from '../auth/guards/admin-only.guard';
 import { UserService } from './user.service';
-import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -40,14 +39,12 @@ export class UserController {
   @ApiResponse({ status: 200, description: 'Users retrieved successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async findAll(@Request() req) {
-    // Agar admin bo'lsa, hamma userlarni ko'rsatadi
     if (req.user && req.user.isAdmin) {
       return this.userService.findAll();
     }
     if (!req.user?.sub) {
       throw new UnauthorizedException('User ID is required from token');
     }
-    // Oddiy user faqat o'zini ko'radi
     return this.userService.findSelf(req.user.sub);
   }
 

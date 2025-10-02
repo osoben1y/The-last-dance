@@ -32,7 +32,7 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return resSuccess({ message: 'Login successful', token });
   }
-  // Duplicate constructor removed
+  
   async adminLogin(loginDto: LoginDto) {
     const admin = await this.adminRepository.findOne({
       where: { email: loginDto.email },
