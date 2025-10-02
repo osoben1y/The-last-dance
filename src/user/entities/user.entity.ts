@@ -20,8 +20,8 @@ export class User {
   @Column({ type: 'varchar' })
   password: string;
 
-  @Column({ type: 'varchar', nullable: true })
-  phone: string;
+  @Column({ type: 'boolean', default: false, nullable: true, name: 'is_verified' })
+  isVerified: boolean;
 
   @CreateDateColumn()
   createdAt: Date;

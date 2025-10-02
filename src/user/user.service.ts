@@ -36,7 +36,6 @@ export class UserService implements OnModuleInit {
         name: dto.name,
         email: dto.email,
         password: hashedPassword,
-        phone: dto.phone,
       });
       const savedUser = await this.userRepository.save(user);
 
