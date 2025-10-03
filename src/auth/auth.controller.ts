@@ -22,13 +22,6 @@ export class AuthController {
           email: 'user@example.com',
           password: 'password123'
         }
-      },
-      admin: {
-        summary: 'Admin login example',
-        value: {
-          email: 'admin@example.com',
-          password: 'admin123'
-        }
       }
     }
   })
@@ -62,7 +55,6 @@ export class AuthController {
           name: 'John Doe',
           email: 'john@example.com',
           password: 'password123',
-          phone: '+998901234567'
         }
       }
     }
@@ -116,38 +108,5 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Bad request' })
   async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto) {
     return this.authService.verifyOtp(verifyOtpDto);
-  }
-
-  @Post('admin-login')
-  @ApiOperation({ summary: 'Admin login (legacy)' })
-  @ApiBody({
-    type: LoginDto,
-    examples: {
-      admin: {
-        summary: 'Admin login example',
-        value: {
-          email: 'admin@example.com',
-          password: 'admin123'
-        }
-      }
-    }
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Admin logged in successfully',
-    schema: {
-      example: {
-        statusCode: 200,
-        message: 'Success',
-        data: {
-          message: 'Admin login successful',
-          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
-        }
-      }
-    }
-  })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async adminLogin(@Body() loginDto: LoginDto) {
-    return this.authService.adminLogin(loginDto);
   }
 }

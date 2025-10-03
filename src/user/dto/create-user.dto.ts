@@ -1,9 +1,6 @@
 import {
   IsEmail,
-  IsEnum,
   IsNotEmpty,
-  IsOptional,
-  IsPhoneNumber,
   IsString,
   MaxLength,
   MinLength,
@@ -44,15 +41,4 @@ export class CreateUserDto {
   @MaxLength(20)
   password: string;
 
-  @ApiProperty({
-    example: '+998901234567',
-    description: 'Phone number (7-15 characters)',
-    minLength: 7,
-    maxLength: 15
-  })
-  @IsString()
-  @IsNotEmpty()
-  @MaxLength(15)
-  @IsPhoneNumber()
-  phone: string;
 }

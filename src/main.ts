@@ -18,7 +18,6 @@ async function bootstrap() {
     .setTitle('THE LAST DANCE')
     .setDescription('Final Project "Airways system management" => created by Asadbek Mamajonov. The project have been given. by Azim Umarov(Main teacher)')
     .setVersion('5.7')
-    .addTag('Airways')
     .addBearerAuth()
     .build();
 

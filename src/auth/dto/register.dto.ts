@@ -36,13 +36,4 @@ export class RegisterDto {
   @MinLength(3)
   password: string;
 
-  @ApiProperty({
-    example: '+998901234567',
-    description: 'Phone number (7-15 characters)',
-    minLength: 7,
-    maxLength: 15
-  })
-  @IsString()
-  @Length(7, 15)
-  phone: string;
 }
